@@ -20,7 +20,7 @@ let acao3 = null
 let meuCanvas = document.getElementById( 'meuCanvas' );
 
 let renderer = new THREE.WebGLRenderer( { canvas: meuCanvas } );
-renderer.setSize(800, 600);
+renderer.setSize(500, 400);
 renderer.shadowMap.enabled = true;
 
 camara.position.set(6,4,7);
