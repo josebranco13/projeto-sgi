@@ -5,63 +5,206 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar Ajustada</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
 
+        header {
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+        }
+
+        .search-container input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+        }
+
+        /* Flexbox container para canvas e detalhes */
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .canvas-container {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        canvas {
+            border: 1px solid #ccc; /* Opcional: borda para destacar o canvas */
+            width: 100%;
+            height: auto;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .controls button,
+        .controls select {
+            margin: 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .controls button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .product-details {
+            flex: 1;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-details h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .product-details .price {
+            font-size: 18px;
+            color: #111;
+            margin: 10px 0;
+        }
+
+        .product-details .old-price {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .product-details .discount {
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        .product-actions {
+            margin-top: 20px;
+        }
+
+        .product-actions button {
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product-actions button:hover {
+            background-color: #333;
+        }
+
+        .details-list {
+            margin-top: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .details-list li {
+            margin: 10px 0;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
-    <div id="navbar"></div> 
+    <div id="navbar"></div>
 
-    <div>
-        <canvas id="meuCanvas"></canvas>
+    <!-- Canvas e detalhes do produto lado a lado -->
+    <div class="content">
+        <!-- Container para o canvas e botões -->
+        <div class="canvas-container">
+            <canvas id="meuCanvas" width="400" height="300"></canvas>
+            <!-- Botões abaixo do canvas -->
+            <div class="controls">
+                <button id="btn_play">Play</button>
+                <button id="btn_pause">Pause</button>
+                <button id="btn_stop">Stop</button>
+                <button id="btn_reverse">Reverse</button>
+                <label>Loop:
+                    <select id="menu_loop">
+                        <option value="1">Uma Vez</option>
+                        <option value="2" selected>Repetir</option>
+                        <option value="3">Ping Pong</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <!-- Detalhes do produto -->
+        <div class="product-details">
+            <h1>Aplique Articulado, Moke</h1>
+            <div class="rating">⭐ 2,8/5 (26 avaliações)</div>
+            <div class="price">
+                <span class="old-price">139,00 €</span>
+                <span class="discount">-20%</span><br>
+                <strong>111,20 €</strong>
+            </div>
+            <div class="product-actions">
+                <button>Adicionar ao Carrinho</button>
+            </div>
+            <ul class="details-list">
+                <li>Cor: Castanho</li>
+                <li>Tamanho: Único</li>
+            </ul>
+        </div>
     </div>
 
-    <div>
-        <p>
-            <button id="btn_play">Play</button>
-            <button id="btn_pause">Pause</button>
-            <button id="btn_stop">Stop</button>
-            <button id="btn_reverse">Reverse</button>
-            <label>Loop:
-                <select id="menu_loop">
-                    <option value="1">Uma Vez</option>
-                    <option value="2" selected>Repetir</option>
-                    <option value="3">Ping Pong</option>
-                </select>
-            </label>
-        </p>
-
-    </div>
-
-  <!-- Scripts -->
-  <script async src="/node_modules/es-module-shims.js"></script>
-  <script type="importmap">
+    <!-- Scripts -->
+    <script async src="/node_modules/es-module-shims.js"></script>
+    <script type="importmap">
     {
-    "imports": {
-      "three": "/node_modules/three/build/three.module.js",
-      "three/addons/": "/node_modules/three/examples/jsm/"
+      "imports": {
+        "three": "/node_modules/three/build/three.module.js",
+        "three/addons/": "/node_modules/three/examples/jsm/"
       }
     }
-  </script>
-  <script type="module" defer src="./main.js"></script>
+    </script>
+    <script type="module" defer src="./main.js"></script>
 
-  <script>
-    async function loadNavbar() {
-        const navbarContainer = document.getElementById('navbar');
-        try {
-            const response = await fetch('./navbar.html');
-            if (response.ok) {
-                const navbarHTML = await response.text();
-                navbarContainer.innerHTML = navbarHTML;
-            } else {
-                console.error('Erro ao carregar navbar:', response.statusText);
+    <script>
+        async function loadNavbar() {
+            const navbarContainer = document.getElementById('navbar');
+            try {
+                const response = await fetch('./navbar.html');
+                if (response.ok) {
+                    const navbarHTML = await response.text();
+                    navbarContainer.innerHTML = navbarHTML;
+                } else {
+                    console.error('Erro ao carregar navbar:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar navbar:', error);
             }
-        } catch (error) {
-            console.error('Erro ao carregar navbar:', error);
         }
-    }
 
-    // Carregar a navbar ao iniciar a página
-    loadNavbar();
-  </script>
+        // Carregar a navbar ao iniciar a página
+        loadNavbar();
+    </script>
 </body>
 </html>
