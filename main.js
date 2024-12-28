@@ -1,16 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-/*
-Uma cena Three.js
-Um canvas 800x600
-Uma câmara na posição inicial (4, 3, 2)
-OrbitControls
-Uma cena fornecida (em glTF)
-Um ponto de luz branca (PointLight), na posição (3, 4, 0) e com uma intensidade de 30
-*/
+
 let cena = new THREE.Scene();
-let camara = new THREE.PerspectiveCamera(70, 800/600, 0.1, 500);
+let camara = new THREE.PerspectiveCamera(70, 600/500, 0.1, 500);
 
 let misturador = new THREE.AnimationMixer(cena)
 let acao = null
@@ -20,7 +13,7 @@ let acao3 = null
 let meuCanvas = document.getElementById( 'meuCanvas' );
 
 let renderer = new THREE.WebGLRenderer( { canvas: meuCanvas } );
-renderer.setSize(500, 400);
+renderer.setSize(600, 500);
 renderer.shadowMap.enabled = true;
 
 camara.position.set(6,4,7);
@@ -107,8 +100,5 @@ document.getElementById('menu_loop').onchange = function(){
     }
 }
 
-let luz = new THREE.PointLight("white", 10);
-luz.position.set(5, 3, 5);
-cena.add(luz);
-
-luz.castShadow = true
+let luzAmbiente = new THREE.AmbientLight("white", 0.05);
+cena.add(luzAmbiente);
