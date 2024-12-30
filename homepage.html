@@ -317,12 +317,12 @@
         }
 
         async function loadDescription() {
-            const navbarContainer = document.getElementById('description');
+            const descriptionContainer = document.getElementById('description');
             try {
                 const response = await fetch('./descricao.html');
                 if (response.ok) {
-                    const navbarHTML = await response.text();
-                    navbarContainer.innerHTML = navbarHTML;
+                    const descriptionHTML = await response.text();
+                    descriptionContainer.innerHTML = descriptionHTML;
                 } else {
                     console.error('Erro ao carregar descricao:', response.statusText);
                 }

@@ -111,12 +111,12 @@
         .inferior-esquerdo a,
         .inferior-direito a,
         .superior-esquerdo a {
-            text-decoration: none; /* Remove o sublinhado */
+            text-decoration: none;
             color: #000;
             font-weight: bold;
             padding: 5px 10px;
             border-bottom: 2px solid transparent;
-            transition: border-bottom 0.3s, background-color 0.3s; /* Adiciona transição para a cor de fundo */
+            transition: border-bottom 0.3s, background-color 0.3s;
         }
 
         nav a:hover,
@@ -124,31 +124,30 @@
         .inferior-esquerdo a:hover,
         .inferior-direito a:hover,
         .superior-esquerdo a:hover {
-            border-bottom: 2px solid #000; /* Efeito ao passar o mouse nos links "Casa" e "Moda" */
+            border-bottom: 2px solid #000;
         }
 
-        /* Estilo específico para os links com fundo cinza */
         .inferior-esquerdo a:hover,
         .inferior-direito a:hover,
         .superior-direito a:hover {
-            background-color: #f0f0f0; /* Cor de fundo cinza ao passar o mouse */
-            border-bottom: none; /* Remove o sublinhado nos botões "Natal", "Outlet", "Top Vendas", "Marcas" e "Profissionais" */
+            background-color: #f0f0f0;
+            border-bottom: none;
         }
 
         .menu-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; /* Espaçamento reduzido entre barras e texto */
+            gap: 8px;
             background-color: #000;
             color: #fff;
-            padding: 8px 16px; /* Menor preenchimento interno */
+            padding: 8px 16px;
             border: none;
             border-radius: 5px;
-            font-size: 12px; /* Texto menor */
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
-            width: auto; /* Ajusta a largura ao conteúdo */
+            width: auto;
             text-transform: uppercase;
         }
 
@@ -165,7 +164,7 @@
         }
 
         .menu-icon span {
-            width: 16px; /* Barras menores */
+            width: 16px;
             height: 2px;
             background-color: #fff;
         }
@@ -181,10 +180,9 @@
             color: #000;
         }
 
-        /* Estilo para os links com SVGs */
         .superior-direito a:hover,
         .actions a:hover {
-            background-color: #f0f0f0; /* Aplica o fundo cinza aos links com SVGs */
+            background-color: #f0f0f0;
         }
 
     </style>
@@ -213,13 +211,11 @@
                         </svg>
                         Entrar / Registar
                     </a>
-                    <!-- Ícone de Carrinho de Compras foi trocado com o Ícone de Coração -->
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                     </a>
-                    <!-- Ícone de Coração foi trocado com o Carrinho de Compras -->
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M7 4h10l1 2h-12l-1-2zm-1.5 3h13l1.5 10H4.5L5.5 7zM6 21a1 1 0 110-2h12a1 1 0 110 2H6z"/>
