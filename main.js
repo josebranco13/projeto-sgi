@@ -3,102 +3,132 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 let cena = new THREE.Scene();
-let camara = new THREE.PerspectiveCamera(70, 600/500, 0.1, 500);
+let camara = new THREE.PerspectiveCamera(70, 800/500, 0.1, 500);
 
 let misturador = new THREE.AnimationMixer(cena)
-let acao = null
+let acao1 = null
 let acao2 = null
 let acao3 = null
+let acao4 = null
+let acao5 = null
 
 let meuCanvas = document.getElementById( 'meuCanvas' );
 
 let renderer = new THREE.WebGLRenderer( { canvas: meuCanvas } );
-renderer.setSize(600, 500);
+renderer.setSize(800, 500);
 renderer.shadowMap.enabled = true;
 
-camara.position.set(6,4,7);
-camara.lookAt(0, 0, 0);
+camara.position.set(-1.5,12,0);
+
 
 let controlos = new OrbitControls(camara, renderer.domElement);
+controlos.target.set(-8, 11, 2);
 
-const relogio = new THREE.Clock();
-const latencia_minima = 1 / 60;
-let delta = 0;
+camara.lookAt(new THREE.Vector3(-8 , 11, 2));
 
-function animar() {
-    requestAnimationFrame(animar);
-    delta += relogio.getDelta();
-
-    if (delta < latencia_minima) {
-        return;
-    }
-
-    misturador.update(Math.floor(delta / latencia_minima)* latencia_minima)
-    renderer.render(cena, camara)
-    delta = delta % latencia_minima
-}
-animar();
+let S_LightBulb;
+let Abajur;
 
 let carregador = new GLTFLoader()
 carregador.load(
  'projeto_SGI_quarto.glb',
  function ( gltf ) {
     cena.add( gltf.scene )
+    
+    S_LightBulb = gltf.scene.getObjectByName('S_LightBulb');
+    Abajur = gltf.scene.getObjectByName('Abajur');
 
-    let clipe = THREE.AnimationClip.findByName(gltf.animations, 'LongArmAction')
-    acao = misturador.clipAction(clipe)
-    acao.play()
+    let clipe = THREE.AnimationClip.findByName(gltf.animations, 'SupportJointAction')
+    acao1 = misturador.clipAction(clipe)
+    acao1.play()
 
-    clipe = THREE.AnimationClip.findByName(gltf.animations, 'ShortArmAction')
+    clipe = THREE.AnimationClip.findByName(gltf.animations, 'LongArmAction')
     acao2 = misturador.clipAction(clipe)
     acao2.play()
 
-    clipe = THREE.AnimationClip.findByName(gltf.animations, 'SupportJointAction')
+    clipe = THREE.AnimationClip.findByName(gltf.animations, 'ShortArmAction')
     acao3 = misturador.clipAction(clipe)
     acao3.play()
+
+    clipe = THREE.AnimationClip.findByName(gltf.animations, 'ArmToAbajurJointAction')
+    acao4 = misturador.clipAction(clipe)
+    acao4.play()
+
+    clipe = THREE.AnimationClip.findByName(gltf.animations, 'AbajurJointAction.001')
+    acao5 = misturador.clipAction(clipe)
+    acao5.play()
  }
 )
 
-document.getElementById('btn_play').onclick = function(){
-    acao.play()
-    acao2.play()
-    acao3.play()
-}
+const sliderSupportJoint = document.getElementById('animation-slider-supportjoint');
+const sliderLongArm = document.getElementById('animation-slider-longarm');
+const sliderShortArm = document.getElementById('animation-slider-shortarm');
+const sliderArmToAbajur = document.getElementById('animation-slider-armtoabajur');
+const sliderAbajur = document.getElementById('animation-slider-abajur');
 
-document.getElementById('btn_pause').onclick = function(){
-    acao.paused = !acao.paused
-    acao2.paused = !acao2.paused
-}
+sliderSupportJoint.addEventListener('input', () => {
+  if (acao1) {
+    const clipDuration = acao1.getClip().duration;
+    const time = (sliderSupportJoint.value / 100) * clipDuration / 2 + clipDuration*0.25;
+    acao1.time = time;
+  }
+});
 
-document.getElementById('btn_stop').onclick = function(){
-    acao.stop()
-    acao2.stop()
-    acao3.stop()
-}
+sliderLongArm.addEventListener('input', () => {
+  if (acao2) {
+    const clipDuration = acao2.getClip().duration;
+    const time = (sliderLongArm.value / 100) * clipDuration / 2 + clipDuration*0.25;
+    acao2.time = time;
+  }
+});
 
-document.getElementById('btn_reverse').onclick = function(){
-    acao.timeScale = -acao.timeScale
-    acao2.timeScale = -acao2.timeScale
-    acao3.timeScale = -acao3.timeScale
-}
+sliderShortArm.addEventListener('input', () => {
+  if (acao3) {
+    const clipDuration = acao3.getClip().duration;
+    const time = (sliderShortArm.value / 100) * clipDuration / 2 + clipDuration*0.25;
+    acao3.time = time;
+  }
+});
 
-document.getElementById('menu_loop').onchange = function(){
-    switch(this.value){
-        case '1':
-            acao.clampWhenFinished = true
-            acao.setLoop(THREE.LoopOnce)
-            acao2.clampWhenFinished = true
-            acao2.setLoop(THREE.LoopOnce)
-            break
-        case '2':
-            acao.setLoop(THREE.LoopRepeat)
-            acao2.setLoop(THREE.LoopRepeat)
-            break
-        case '3':
-            acao.setLoop(THREE.LoopPingPong)
-            acao2.setLoop(THREE.LoopPingPong)
-    }
-}
+sliderArmToAbajur.addEventListener('input', () => {
+  if (acao4) {
+    const clipDuration = acao4.getClip().duration;
+    const time = (sliderArmToAbajur.value / 100) * clipDuration / 2 + clipDuration*0.25;
+    acao4.time = time;
+  }
+});
+
+sliderAbajur.addEventListener('input', () => {
+  if (acao5) {
+    const clipDuration = acao5.getClip().duration;
+    const time = (sliderAbajur.value / 100) * clipDuration / 2 + clipDuration*0.25;
+    acao5.time = time;
+  }
+});
 
 let luzAmbiente = new THREE.AmbientLight("white", 0.05);
 cena.add(luzAmbiente);
+
+let lampSpotlight = new THREE.SpotLight(0xffffff, 100);
+lampSpotlight.angle = Math.PI / 4;
+lampSpotlight.penumbra = 0.5;
+lampSpotlight.castShadow = true;
+cena.add(lampSpotlight);
+
+
+function animar() {
+    requestAnimationFrame(animar);
+
+    if (misturador) {
+        misturador.update(0)
+    }
+
+    if (S_LightBulb && Abajur) {
+        lampSpotlight.position.copy(Abajur.getWorldPosition(new THREE.Vector3()));
+        lampSpotlight.target.position.copy(S_LightBulb.getWorldPosition(new THREE.Vector3()));
+        lampSpotlight.target.updateMatrixWorld();
+    }
+
+    renderer.render(cena, camara)
+}
+animar();
