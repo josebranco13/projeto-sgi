@@ -13,7 +13,8 @@
         }
 
         header {
-            padding: 20px;
+            padding: 5px; /* Diminuído o padding */
+            margin-bottom: 10px; /* Diminuído o espaçamento entre o header e o conteúdo */
             background-color: #fff;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -27,17 +28,18 @@
 
         .search-container input {
             width: 300px;
-            padding: 10px;
+            padding: 8px; /* Diminuído o padding */
             border: 1px solid #ccc;
             border-radius: 20px;
         }
 
         .content {
-            display: flex; /* Flex container */
+            display: flex;
             flex-wrap: wrap;
             align-items: flex-start;
-            gap: 20px;
-            padding: 20px;
+            gap: 10px; /* Diminuído o espaçamento entre os itens */
+            padding: 10px; /* Diminuído o padding */
+            margin-top: 10px; /* Diminuído o espaçamento superior */
         }
 
         .canvas-container {
@@ -52,42 +54,45 @@
         }
 
         .controls {
-            text-align: center;
-            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Diminuído o espaçamento */
         }
 
-        .controls button,
-        .controls select {
-            margin: 5px;
-            padding: 10px 15px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
+        .row {
+            display: flex;
+            gap: 10px; /* Diminuído o espaçamento */
+            justify-content: space-between;
         }
 
-        .controls button:hover {
-            background-color: #f0f0f0;
+        .box {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        input[type="range"] {
+            width: 100%;
         }
 
         .product-details {
-            flex: 2; /* Flex value increased to take more space */
-            max-width: 600px; /* Ensures it doesn’t stretch too much */
+            flex: 2;
+            max-width: 600px;
             background-color: #fff;
-            padding: 20px;
+            padding: 10px; /* Diminuído o padding */
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 10px; /* Diminuído o espaçamento superior */
         }
 
         .product-details h1 {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 5px; /* Diminuído o espaçamento abaixo do título */
         }
 
         .product-details .price {
             font-size: 18px;
             color: #111;
-            margin: 10px 0;
+            margin: 5px 0; /* Diminuído o espaçamento */
         }
 
         .product-details .old-price {
@@ -104,11 +109,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px; /* Diminuído o espaçamento superior */
         }
 
         .product-actions button {
-            padding: 15px 20px;
+            padding: 12px 15px;
             font-size: 16px;
             font-weight: bold;
             color: #fff;
@@ -134,13 +139,13 @@
         }
 
         .details-list {
-            margin-top: 20px;
+            margin-top: 10px; /* Diminuído o espaçamento */
             list-style: none;
             padding: 0;
         }
 
         .details-list li {
-            margin: 10px 0;
+            margin: 5px 0; /* Diminuído o espaçamento */
             font-size: 14px;
         }
 
@@ -153,7 +158,7 @@
 
         .policy-features div {
             background-color: #fff;
-            padding: 10px;
+            padding: 8px; /* Diminuído o padding */
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
@@ -165,10 +170,46 @@
             border: 2px solid #000;
             padding: 10px;
             width: 560px;
-            margin: 20px auto;
+            margin: 10px auto; /* Diminuído o espaçamento superior */
             text-align: center;
             border-radius: 5px;
             box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilos para a caixa de quantidade */
+        .box-quantidade {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-controls button {
+            font-size: 20px;
+            padding: 5px 10px;
+            background-color: #ddd;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .quantity-controls button:hover {
+            background-color: #ccc;
+        }
+
+        #product-quantity {
+            width: 60px;
+            text-align: center;
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -179,25 +220,31 @@
         <div class="canvas-container">
             <canvas id="meuCanvas" width="600" height="300"></canvas>
             <div class="controls">
-                <div class="box">
-                    <label for="animation-slider-supportjoint">Support Joint</label>
-                    <input id="animation-slider-supportjoint" class="slider" type="range" min="0" max="100" step="1" value="0">
+                <div class="row">
+                    <div class="box">
+                        <label for="animation-slider-supportjoint">Support Joint</label>
+                        <input id="animation-slider-supportjoint" class="slider" type="range" min="0" max="100" step="1" value="0">
+                    </div>
+                    <div class="box">
+                        <label for="animation-slider-longarm">Long Arm</label>
+                        <input id="animation-slider-longarm" class="slider" type="range" min="0" max="100" step="1" value="0">
+                    </div>
                 </div>
-                <div class="box">
-                    <label for="animation-slider-supportjoint">Long Arm</label>
-                    <input id="animation-slider-longarm" class="slider" type="range" min="0" max="100" step="1" value="0">
+                <div class="row">
+                    <div class="box">
+                        <label for="animation-slider-shortarm">Short Arm</label>
+                        <input id="animation-slider-shortarm" class="slider" type="range" min="0" max="100" step="1" value="0">
+                    </div>
+                    <div class="box">
+                        <label for="animation-slider-abajurjoint">Abajur Joint</label>
+                        <input id="animation-slider-abajurjoint" class="slider" type="range" min="0" max="100" step="1" value="0">
+                    </div>
                 </div>
-                <div class="box">
-                    <label for="animation-slider-supportjoint">Short Arm</label>
-                    <input id="animation-slider-shortarm" class="slider" type="range" min="0" max="100" step="1" value="0">
-                </div>
-                <div class="box">
-                    <label for="animation-slider-supportjoint">Arm To Abajur Joint</label>
-                    <input id="animation-slider-armtoabajurjoint" class="slider" type="range" min="0" max="100" step="1" value="0">
-                </div>
-                <div class="box">
-                    <label for="animation-slider-supportjoint">Abajur Joint</label>
-                    <input id="animation-slider-abajurjoint" class="slider" type="range" min="0" max="100" step="1" value="0">
+                <div class="row">
+                    <div class="box">
+                        <label for="animation-slider-armtoabajurjoint">Arm To Abajur Joint</label>
+                        <input id="animation-slider-armtoabajurjoint" class="slider" type="range" min="0" max="100" step="1" value="0">
+                    </div>
                 </div>
             </div>
         </div>
@@ -214,6 +261,13 @@
                 <li>Cor: Castanho</li>
                 <li>Tamanho: Único</li>
             </ul>
+
+            <div class="box-quantidade">
+                <div class="quantity-controls">
+                    <input id="product-quantity" type="number" value="1" min="1" step="1">
+                </div>
+            </div>
+
             <div class="product-actions">
                 <button>Juntar ao Carrinho</button>
                 <svg xmlns="http://www.w3.org/2000/svg" class="heart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -273,6 +327,8 @@
                 this.setAttribute('stroke', 'black');
             }
         });
+
+
     </script>
 </body>
 </html>
