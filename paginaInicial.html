@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Redoute | Grandes descontos em Moda & Casa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        #navbar {
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .fullwidth-image {
+            width: 100%;
+            display: block;
+        }
+
+        .content {
+            margin: 100px auto;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .product-section {
+            display: flex;
+            flex-wrap: nowrap;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            flex: 0 0 250px;
+            height: 350px; /* Define a altura fixa */
+        }
+
+        .product-card img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            color: #777;
+            margin: 5px 0;
+        }
+
+        .product-card .price {
+            font-size: 16px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .highlight-card {
+            flex: 0 0 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Coloca texto no topo e botão no fundo */
+            align-items: flex-start; /* Alinha à esquerda */
+            background-color: #ddeedd;
+            border-radius: 8px;
+            padding: 20px;
+            height: 350px; /* Igual às outras caixas */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-card h2 {
+            font-size: 20px;
+            color: #333;
+            margin: 0; /* Remove margem extra */
+        }
+
+        .highlight-card button {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .highlight-card button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div>
+        <img src="./images/img_pag_princ.png" alt="Imagem de destaque" class="fullwidth-image">
+    </div>
+
+    <div class="content">
+        <div class="product-section">
+            <div class="highlight-card">
+                <h2>Ilumine a sua casa</h2>
+                <button>Ver tudo!</button>
+            </div>
+            <div class="product-card">
+                <img src="./images/abajur_teto.jpg" alt="Abajur Makita">
+                <h3>LA REDOUTE INTERIEURS</h3>
+                <p>Abajur de teto, em verga, Ø50 cm, Makita</p>
+                <p class="price">104,00 €</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/abajur_laranja.jpg" alt="Abajur Kinoko">
+                <h3>LA REDOUTE INTERIEURS</h3>
+                <p>Abajur de teto em vidro de cor Ø30,5 cm, Kinoko</p>
+                <p class="price">102,20 €</p>
+            </div>
+            <div class="product-card">
+                <img src="./images/abajur_bolinhas.jpg" alt="Candelabro Bullesco">
+                <h3>AM.PM</h3>
+                <p>Candeeiro de teto em vidro fumado e metal, Bullesco</p>
+                <p class="price">279,20 €</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadNavbar() {
+            const navbarContainer = document.getElementById('navbar');
+            try {
+                const response = await fetch('./navbar.html');
+                if (response.ok) {
+                    const navbarHTML = await response.text();
+                    navbarContainer.innerHTML = navbarHTML;
+                } else {
+                    console.error('Erro ao carregar navbar:', response.statusText);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar navbar:', error);
+            }
+        }
+
+        loadNavbar();
+    </script>
+</body>
+</html>
