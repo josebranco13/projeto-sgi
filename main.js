@@ -67,15 +67,17 @@ const sliderArmToAbajur = document.getElementById('animation-slider-armtoabajur'
 const sliderAbajur = document.getElementById('animation-slider-abajur');
 const btnLight = document.getElementById('btn-light');
 
-  document.getElementById('btn-light').onclick = function(){
-    if (btnLight.textContent == "Turn light off") {
-      lampSpotlight.intensity = 0;
-      btnLight.textContent = "Turn light on"
-    } else if (btnLight.textContent == "Turn light on"){
-      lampSpotlight.intensity = 100;
-      btnLight.textContent = "Turn light off"
-    }
+document.getElementById('btn-light').onclick = function(){
+  if (btnLight.textContent == "Turn light off") {
+    lampSpotlight.intensity = 0;
+    luzAmbiente.intensity = 0.1;
+    btnLight.textContent = "Turn light on"
+  } else if (btnLight.textContent == "Turn light on"){
+    luzAmbiente.intensity = 0.05;
+    lampSpotlight.intensity = 100;
+    btnLight.textContent = "Turn light off"
   }
+}
 
 sliderSupportJoint.addEventListener('input', () => {
   if (acao1) {
@@ -117,10 +119,10 @@ sliderAbajur.addEventListener('input', () => {
   }
 });
 
-let luzAmbiente = new THREE.AmbientLight("white", 0.05);
+let luzAmbiente = new THREE.AmbientLight("white", 0.1);
 cena.add(luzAmbiente);
 
-let lampSpotlight = new THREE.SpotLight(0xffffff, 100);
+let lampSpotlight = new THREE.SpotLight(0xffffff, 0);
 lampSpotlight.angle = Math.PI / 4;
 lampSpotlight.penumbra = 0.5;
 lampSpotlight.castShadow = true;
