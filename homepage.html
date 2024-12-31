@@ -26,13 +26,6 @@
             height: 50px;
         }
 
-        .search-container input {
-            width: 300px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 20px;
-        }
-
         .content {
             display: flex;
             flex-wrap: wrap;
@@ -176,13 +169,69 @@
         }
 
         .box {
-
             padding: 10px;
             width: 80%;
             margin: 15px auto;
             text-align: center;
             border-radius: 5px;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .modal-content .color-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .modal-content .color-option.selected {
+            border-color: #000;
+            background-color: #f0f0f0;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            background-color: red;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .color-option.disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        .color-option.disabled:hover {
+            background-color: inherit;
+        }
+
+
     </style>
 </head>
 <body>
@@ -214,7 +263,7 @@
                 Abajur Joint<br>
                 <input id="animation-slider-abajur" class="slider" type="range" min="0" max="100" step="1" value="50">
             </div>
-            <button id="btn-light">Turn light off</button>
+            <button id="btn-light">Turn light on</button>
         </div>
 
         <div class="product-details">
@@ -226,7 +275,7 @@
                 <strong>111,20 €</strong>
             </div>
             <ul class="details-list">
-                <li><button class="detail-button">Cor: Castanho</button></li>
+                <li><button class="detail-button" id="colorButton">Cor: Castanho</button></li>
                 <li><button class="detail-button">Tamanho: Único</button></li>
             </ul>
             <div class="product-actions">
@@ -246,6 +295,15 @@
                 <div>✔️ <strong>ENVIO GRÁTIS*</strong></div>
                 <div>✔️ <strong>DEVOLUÇÃO GRÁTIS*</strong></div>
             </div>
+        </div>
+    </div>
+
+    <div id="colorModal" class="modal">
+        <div class="modal-content">
+            <h2>2 cores disponíveis</h2>
+            <div class="color-option" data-color="castanho">Castanho</div>
+            <div class="color-option disabled" data-color="preto">Preto (não disponível)</div>
+            <button class="modal-close">Fechar</button>
         </div>
     </div>
 
@@ -306,6 +364,48 @@
                 this.setAttribute('stroke', 'black');
             }
         });
+
+        const colorButton = document.getElementById('colorButton');
+        const colorModal = document.getElementById('colorModal');
+        const modalClose = document.querySelector('.modal-close');
+        const colorOptions = document.querySelectorAll('.color-option');
+
+        colorButton.addEventListener('click', () => {
+            colorModal.style.display = 'flex';
+        });
+
+        modalClose.addEventListener('click', () => {
+            colorModal.style.display = 'none';
+        });
+
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                colorButton.textContent = `Cor: ${option.dataset.color}`;
+                colorModal.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === colorModal) {
+                colorModal.style.display = 'none';
+            }
+        });
+
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                if (option.classList.contains('disabled')) {
+                    alert('Esta cor não está disponível.');
+                    return;
+                }
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                colorButton.textContent = `Cor: ${option.dataset.color}`;
+                colorModal.style.display = 'none';
+            });
+        });
+
     </script>
 </body>
 </html>
