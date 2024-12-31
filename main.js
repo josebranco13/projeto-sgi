@@ -65,6 +65,17 @@ const sliderLongArm = document.getElementById('animation-slider-longarm');
 const sliderShortArm = document.getElementById('animation-slider-shortarm');
 const sliderArmToAbajur = document.getElementById('animation-slider-armtoabajur');
 const sliderAbajur = document.getElementById('animation-slider-abajur');
+const btnLight = document.getElementById('btn-light');
+
+  document.getElementById('btn-light').onclick = function(){
+    if (btnLight.textContent == "Turn light off") {
+      lampSpotlight.intensity = 0;
+      btnLight.textContent = "Turn light on"
+    } else if (btnLight.textContent == "Turn light on"){
+      lampSpotlight.intensity = 100;
+      btnLight.textContent = "Turn light off"
+    }
+  }
 
 sliderSupportJoint.addEventListener('input', () => {
   if (acao1) {
