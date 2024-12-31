@@ -34,7 +34,7 @@ carregador.load(
  'projeto_SGI_quarto.glb',
  function ( gltf ) {
     cena.add( gltf.scene )
-
+    
     S_LightBulb = gltf.scene.getObjectByName('S_LightBulb');
     Abajur = gltf.scene.getObjectByName('Abajur');
 
