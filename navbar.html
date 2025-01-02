@@ -105,7 +105,7 @@
             fill: #000;
         }
 
-        nav a,
+        .navbar a,
         .menu-btn,
         .actions a,
         .inferior-esquerdo a,
@@ -117,21 +117,6 @@
             padding: 5px 10px;
             border-bottom: 2px solid transparent;
             transition: border-bottom 0.3s, background-color 0.3s;
-        }
-
-        nav a:hover,
-        .actions a:hover,
-        .inferior-esquerdo a:hover,
-        .inferior-direito a:hover,
-        .superior-esquerdo a:hover {
-            border-bottom: 2px solid #000;
-        }
-
-        .inferior-esquerdo a:hover,
-        .inferior-direito a:hover,
-        .superior-direito a:hover {
-            background-color: #f0f0f0;
-            border-bottom: none;
         }
 
         .menu-btn {
@@ -147,8 +132,9 @@
             font-size: 12px;
             font-weight: bold;
             cursor: pointer;
-            width: auto;
             text-transform: uppercase;
+            position: relative;
+            width: auto;
         }
 
         .menu-btn:hover {
@@ -161,27 +147,63 @@
             justify-content: center;
             align-items: center;
             gap: 3px;
+            position: relative;
+            width: 20px;
+            height: 15px;
         }
 
         .menu-icon span {
-            width: 16px;
+            width: 20px;
             height: 2px;
             background-color: #fff;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
 
-        .actions svg {
-            width: 20px;
-            height: 20px;
-            fill: #000;
+        .menu-btn:hover .menu-icon span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
         }
 
-        .inferior-direito a {
-            font-size: 14px;
-            color: #000;
+        .menu-btn:hover .menu-icon span:nth-child(2) {
+            opacity: 0;
         }
 
-        .superior-direito a:hover,
-        .actions a:hover {
+        .menu-btn:hover .menu-icon span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            z-index: 1;
+            padding: 10px 0;
+            overflow-y: auto;
+        }
+
+        .menu-dropdown a {
+            display: block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .menu-dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .menu-btn.active + .menu-dropdown {
+            display: block;
+        }
+
+        .inferior-esquerdo a:hover,
+        .inferior-direito a:hover,
+        .superior-direito a:hover {
             background-color: #f0f0f0;
         }
 
@@ -200,9 +222,7 @@
                 </div>
                 <div class="search-container">
                     <input type="text" placeholder="O que procura?">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M10 2a8 8 0100 16 8 8 0 000-16zM10 0a10 10 0 017.071 17.071L20.293 20.293a1 1 0 01-1.414 1.414L15.657 17.07A10 10 0 1110 0z"></path>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>
                 </div>
                 <div class="superior-direito">
                     <a href="#">
@@ -233,6 +253,15 @@
                         </div>
                         MENU
                     </button>
+                    <div class="menu-dropdown">
+                        <a href="#">Opção 1</a>
+                        <a href="#">Opção 2</a>
+                        <a href="#">Opção 3</a>
+                        <a href="#">Opção 4</a>
+                        <a href="#">Opção 5</a>
+                        <a href="#">Opção 6</a>
+                        <a href="#">Opção 7</a>
+                    </div>
                     <a href="#">Natal</a>
                     <a href="#">Outlet</a>
                     <a href="#">Top Vendas</a>
@@ -244,5 +273,22 @@
             </div>
         </div>
     </header>
+
+    <script>
+        const menuButton = document.querySelector('.menu-btn');
+        const menuDropdown = document.querySelector('.menu-dropdown');
+
+        menuButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            menuButton.classList.toggle('active');
+        });
+
+        document.addEventListener('click', function(event) {
+            if (!menuButton.contains(event.target) && !menuDropdown.contains(event.target)) {
+                menuButton.classList.remove('active');
+            }
+        });
+
+    </script>
 </body>
 </html>
