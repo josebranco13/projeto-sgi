@@ -180,18 +180,20 @@
             left: 0;
             background-color: #fff;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-            width: 200px;
+            width: 300px;
             z-index: 1;
-            padding: 10px 0;
+            padding: 20px 0;
             overflow-y: auto;
             padding-top: 40px;
         }
 
         .menu-dropdown a {
             display: block;
-            padding: 8px 16px;
+            padding: 12px 24px;
             text-decoration: none;
             color: black;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         .menu-dropdown a:hover {
@@ -212,8 +214,8 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             background-color: #ccc;
             border-radius: 50%;
             display: flex;
@@ -223,11 +225,54 @@
         }
 
         .close-btn svg {
-            width: 12px;
-            height: 12px;
+            width: 16px;
+            height: 16px;
             fill: #000;
         }
 
+        .menu-top-options {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+
+        .menu-top-options div {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 8px 12px;
+            transition: background-color 0.3s ease;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .menu-top-options div:hover {
+            background-color: #f0f0f0;
+        }
+
+        .menu-top-options div a {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            padding: 8px 12px;
+        }
+
+        .menu-top-options svg {
+            width: 24px;
+            height: 24px;
+            fill: #000;
+        }
+        .casa-options, .moda-options {
+            position: relative;
+        }
+
+        .menu-dropdown .active-options {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -280,13 +325,35 @@
                                 <path d="M12 10.586l4.95-4.95 1.415 1.414-4.95 4.95 4.95 4.95-1.415 1.414-4.95-4.95-4.95 4.95-1.415-1.414 4.95-4.95-4.95-4.95 1.415-1.414z"/>
                             </svg>
                         </div>
-                        <a href="#">Opção 1</a>
-                        <a href="#">Opção 2</a>
-                        <a href="#">Opção 3</a>
-                        <a href="#">Opção 4</a>
-                        <a href="#">Opção 5</a>
-                        <a href="#">Opção 6</a>
-                        <a href="#">Opção 7</a>
+                        <div class="menu-top-options">
+                            <div class="option casa-option active" id="casa">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M20 12h-3V8.585l-9.707 9.707-2.828-2.828L12 3l12 12-2.828 2.828z"/>
+                                </svg>
+                                Casa
+                            </div>
+                            <div class="option moda-option" id="moda">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M19 1h-14c-1.1 0-1.99.89-1.99 1.99l-.01 18.01c0 1.1.89 2.01 1.99 2.01h14c1.1 0 1.99-.89 1.99-1.99l.01-18.01c0-1.1-.89-1.99-1.99-1.99zm0 19h-14v-14h14v14zm-7-6h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2v-2h2v2z"/>
+                                </svg>
+                                Moda
+                            </div>
+                        </div>
+
+                        <div class="casa-options active-options">
+                            Categorias de casa
+                            <a href="#">Têxtil-lar</a>
+                            <a href="#">Sofás, Cadeirões</a>
+                            <a href="#">Mesas, cadeiras</a>
+                            <a href="#">Camas, edredons, almofadas, colchões</a>
+                            <a href="#">Mobiliário</a>
+                            <a href="#">Tapetes, passadeiras</a>
+                            <a href="#">Decoração</a>
+                            <a href="#">Iluminação</a>
+                            <a href="#">Jardim, varandas</a>
+                            <a href="#">Eletrodomésticos</a>
+                            <a href="#">Outlet</a>
+                        </div>
                     </div>
 
                     <a href="#">Natal</a>
@@ -305,6 +372,10 @@
         const menuButton = document.querySelector('.menu-btn');
         const menuDropdown = document.querySelector('.menu-dropdown');
         const closeButton = document.querySelector('.close-btn');
+        const casaOption = document.querySelector('#casa');
+        const modaOption = document.querySelector('#moda');
+        const casaOptions = document.querySelector('.casa-options');
+        const modaOptions = document.querySelector('.moda-options');
 
         menuButton.addEventListener('click', function(event) {
             event.stopPropagation();
@@ -320,6 +391,20 @@
         closeButton.addEventListener('click', function(event) {
             event.stopPropagation();
             menuButton.classList.remove('active');
+        });
+
+        casaOption.addEventListener('click', function() {
+            casaOptions.classList.add('active-options');
+            modaOptions.classList.remove('active-options');
+            casaOption.classList.add('active');
+            modaOption.classList.remove('active');
+        });
+
+        modaOption.addEventListener('click', function() {
+            casaOptions.classList.remove('active-options');
+            modaOptions.classList.add('active-options');
+            casaOption.classList.remove('active');
+            modaOption.classList.add('active');
         });
     </script>
 </body>
