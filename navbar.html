@@ -184,6 +184,7 @@
             z-index: 1;
             padding: 10px 0;
             overflow-y: auto;
+            padding-top: 40px;
         }
 
         .menu-dropdown a {
@@ -205,6 +206,26 @@
         .inferior-direito a:hover,
         .superior-direito a:hover {
             background-color: #f0f0f0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .close-btn svg {
+            width: 12px;
+            height: 12px;
+            fill: #000;
         }
 
     </style>
@@ -254,6 +275,11 @@
                         MENU
                     </button>
                     <div class="menu-dropdown">
+                        <div class="close-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 10.586l4.95-4.95 1.415 1.414-4.95 4.95 4.95 4.95-1.415 1.414-4.95-4.95-4.95 4.95-1.415-1.414 4.95-4.95-4.95-4.95 1.415-1.414z"/>
+                            </svg>
+                        </div>
                         <a href="#">Opção 1</a>
                         <a href="#">Opção 2</a>
                         <a href="#">Opção 3</a>
@@ -262,6 +288,7 @@
                         <a href="#">Opção 6</a>
                         <a href="#">Opção 7</a>
                     </div>
+
                     <a href="#">Natal</a>
                     <a href="#">Outlet</a>
                     <a href="#">Top Vendas</a>
@@ -277,6 +304,7 @@
     <script>
         const menuButton = document.querySelector('.menu-btn');
         const menuDropdown = document.querySelector('.menu-dropdown');
+        const closeButton = document.querySelector('.close-btn');
 
         menuButton.addEventListener('click', function(event) {
             event.stopPropagation();
@@ -289,6 +317,10 @@
             }
         });
 
+        closeButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            menuButton.classList.remove('active');
+        });
     </script>
 </body>
 </html>
